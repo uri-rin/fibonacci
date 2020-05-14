@@ -1,13 +1,16 @@
 'use strict';
 
-// 指数オーダーのfib関数の実装
+// メモ化によるアルゴリズムの改善
+const memo = new Map();
+memo.set(0, 0);
+memo.set(1, 1);
 function fib(n) {
-    if (n === 0) {
-        return 0;
-    } else if (n === 1) {
-        return 1
+    if (memo.has(n)) {
+        return memo.get(n);
     }
-    return fib(n-2) + fib(n-1);
+    const value = fib(n-2) + fib(n-1);
+    memo.set(n, value);
+    return value;
 }
 const length = 40;
 for (let i = 0; i <= length; i++) {
